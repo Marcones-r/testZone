@@ -1,27 +1,27 @@
-import {Component} from '@angular/core';
+import { Component } from "@angular/core";
+import { FruitSelectorComponent } from "./fruit-selector/fruit-selector.component";
+import { CommonModule } from "@angular/common";
+
 
 @Component({
   selector: 'app-root',
-  styleUrls: ['app.component.css'],
+  standalone: true,
+  imports: [FruitSelectorComponent, CommonModule],
   template: `
-  <!--  -->
-  <!-- <button [disabled]="isDisabled">Cliquez-moi</button> -->
-  <!-- <p [style.fontSize.px]="fontSize">Texte avec taille dynamique</p> -->
+    <h2>Choisis un fruit :</h2>
+    <app-fruit-selector (fruitChosen)="ajouterFruit($event)"></app-fruit-selector>
+
+    <h3>Fruits sélectionnés :</h3>
+    <ul>
+      <li *ngFor="let fruit of panier">{{ fruit }}</li>
+    </ul>
   `,
 })
 export class AppComponent {
-  // 
-  // isDisabled = true; /* isEditable est la "propriéte de classe et true est la "valeur" */
-  // fontSize = 66;
+  panier: string[] = [];
+
+  ajouterFruit(fruit: string) {
+    this.panier.push(fruit);
+  }
+
 }
-
-// Lien du l'exercice : https://angular.dev/tutorials/learn-angular/6-property-binding
-
-
-/*
-Liaison de propriétés dans Angular
-edit
-La liaison de propriétés dans Angular vous permet de définir des valeurs pour les propriétés des éléments HTML, des composants Angular et plus encore.
-
-Utilisez la liaison de propriétés pour définir dynamiquement les valeurs des propriétés et des attributs. Vous pouvez notamment activer/désactiver des boutons, définir des chemins d'accès aux images par programmation et partager des valeurs entre composants.
-*/
